@@ -1,0 +1,61 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:listDivider">@style/ThinHorizontalLine</item>
+    </style>
+
+    <style name="GridRow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="Square">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <!-- <item name="android:text">0</item> -->
+        <item name="android:textSize">@dimen/abc_text_size_large_material</item>
+        <item name="android:gravity">center</item>
+        <item name="android:inputType">numberSigned</item>
+        <item name="android:ems">1</item>
+        <item name="android:maxEms">1</item>
+        <item name="android:minEms">1</item>
+    </style>
+
+    <style name="NumberButton">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="ThinHorizontalLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:background">@color/primary_dark_material_dark</item>
+    </style>
+
+    <style name="ThickHorizontalLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">5dp</item>
+        <item name="android:background">@color/primary_dark_material_dark</item>
+    </style>
+
+    <style name="ThinVerticalLine">
+        <item name="android:layout_width">2dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/primary_dark_material_dark</item>
+    </style>
+
+    <style name="ThickVerticalLine">
+        <item name="android:layout_width">5dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/primary_dark_material_dark</item>
+    </style>
+
+
+</resources>

@@ -1,0 +1,276 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:orientation="vertical"
+    >
+
+
+    <View style="@style/ThickHorizontalLine"/>
+    <LinearLayout style="@style/GridRow">
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/A1"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/A2"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/A3"/>
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/A4"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/A5"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/A6"/>
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/A7"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/A8"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/A9"/>
+        <View style="@style/ThickVerticalLine"/>
+    </LinearLayout>
+
+    <View style="@style/ThinHorizontalLine"/>
+    <LinearLayout style="@style/GridRow">
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/B1"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/B2"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/B3"/>
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/B4"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/B5"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/B6"/>
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/B7"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/B8"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/B9"/>
+        <View style="@style/ThickVerticalLine"/>
+    </LinearLayout>
+
+    <View style="@style/ThinHorizontalLine"/>
+    <LinearLayout style="@style/GridRow">
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/C1"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/C2"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/C3"/>
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/C4"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/C5"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/C6"/>
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/C7"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/C8"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/C9"/>
+        <View style="@style/ThickVerticalLine"/>
+    </LinearLayout>
+
+    <View style="@style/ThickHorizontalLine"/>
+    <LinearLayout style="@style/GridRow">
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/D1"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/D2"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/D3"/>
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/D4"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/D5"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/D6"/>
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/D7"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/D8"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/D9"/>
+        <View style="@style/ThickVerticalLine"/>
+    </LinearLayout>
+
+    <View style="@style/ThinHorizontalLine"/>
+    <LinearLayout style="@style/GridRow">
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/E1"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/E2"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/E3"/>
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/E4"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/E5"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/E6"/>
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/E7"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/E8"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/E9"/>
+        <View style="@style/ThickVerticalLine"/>
+    </LinearLayout>
+
+    <View style="@style/ThinHorizontalLine"/>
+    <LinearLayout style="@style/GridRow">
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/F1"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/F2"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/F3"/>
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/F4"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/F5"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/F6"/>
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/F7"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/F8"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/F9"/>
+        <View style="@style/ThickVerticalLine"/>
+    </LinearLayout>
+
+    <View style="@style/ThickHorizontalLine"/>
+    <LinearLayout style="@style/GridRow">
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/G1"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/G2"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/G3"/>
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/G4"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/G5"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/G6"/>
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/G7"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/G8"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/G9"/>
+        <View style="@style/ThickVerticalLine"/>
+    </LinearLayout>
+
+    <View style="@style/ThinHorizontalLine"/>
+    <LinearLayout style="@style/GridRow">
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/H1"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/H2"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/H3"/>
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/H4"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/H5"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/H6"/>
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/H7"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/H8"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/H9"/>
+        <View style="@style/ThickVerticalLine"/>
+    </LinearLayout>
+
+    <View style="@style/ThinHorizontalLine"/>
+    <LinearLayout style="@style/GridRow">
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/I1"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/I2"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/I3"/>
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/I4"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/I5"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/I6"/>
+        <View style="@style/ThickVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/I7"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/I8"/>
+        <View style="@style/ThinVerticalLine"/>
+        <TextView style="@style/Square" android:id="@+id/I9"/>
+        <View style="@style/ThickVerticalLine"/>
+    </LinearLayout>
+
+    <View style="@style/ThickHorizontalLine"/>
+
+    <View android:layout_height="15dp" android:layout_width="match_parent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button style="@style/NumberButton" android:text="1" android:id="@+id/one_button"/>
+        <Button style="@style/NumberButton" android:text="2" android:id="@+id/two_button"/>
+        <Button style="@style/NumberButton" android:text="3" android:id="@+id/three_button"/>
+        <Button style="@style/NumberButton" android:text="4" android:id="@+id/four_button"/>
+        <Button style="@style/NumberButton" android:text="5" android:id="@+id/five_button"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button style="@style/NumberButton" android:text="6" android:id="@+id/six_button"/>
+        <Button style="@style/NumberButton" android:text="7" android:id="@+id/seven_button"/>
+        <Button style="@style/NumberButton" android:text="8" android:id="@+id/eight_button"/>
+        <Button style="@style/NumberButton" android:text="9" android:id="@+id/nine_button"/>
+        <Button style="@style/NumberButton" android:text="Del" android:id="@+id/del_button"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2">
+
+        <Button
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Solve It!"
+            android:id="@+id/solve_button"
+            />
+
+        <Button
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Clear"
+            android:id="@+id/clear_button"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

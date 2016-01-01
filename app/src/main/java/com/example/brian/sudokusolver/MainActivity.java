@@ -5,26 +5,15 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.text.InputType;
-import android.text.Layout;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.Toast;
 
-/*
+
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
@@ -38,7 +27,7 @@ import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 import org.w3c.dom.Text;
-*/
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,20 +41,6 @@ public class MainActivity extends ActionBarActivity {
     private ImageView mImageView;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-        mImageView = new ImageView(this);
-        mImageView.setImageBitmap(
-                decodeSampledBitmapFromResource(getResources(), R.drawable.puzzle, 512, 512));
-        setContentView(mImageView);
-    }
-
-
-
-    /*
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
         public void onManagerConnected(int status) {
@@ -83,25 +58,46 @@ public class MainActivity extends ActionBarActivity {
         }
     };
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Bitmap bitmap = decodeSampledBitmapFromResource(getResources(), R.drawable.puzzle, 512, 512);
+
+        Log.i(TAG, "Trying to load OpenCV library");
+        if (!OpenCVLoader.initDebug()) {
+            Log.i(TAG, "Failed to load OpenCV library!");
+        }
+        else {
+            bitmap = processImage(bitmap);
+        }
+
+        mImageView = new ImageView(this);
+        mImageView.setImageBitmap(bitmap);
+        setContentView(mImageView);
+    }
+
+
+
+
 
     @Override
     public void onResume()
     {
         super.onResume();
-        if (!OpenCVLoader.initDebug()) {
-            Log.d(TAG, "Internal OpenCV library not found. Using OpenCV Manager for initialization");
-            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_0_0, this, mLoaderCallback);
-        } else {
-            Log.d(TAG, "OpenCV library found inside package. Using it!");
-            mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
-
-            //
-            Bitmap originalImage = drawableToBitmap(mImageView.getDrawable());
-            Bitmap processedImage = processImage(originalImage);
-            mImageView.setImageBitmap(processedImage);
-        }
+//        if (!OpenCVLoader.initDebug()) {
+//            Log.d(TAG, "Internal OpenCV library not found. Using OpenCV Manager for initialization");
+//            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_0_0, this, mLoaderCallback);
+//        } else {
+//            Log.d(TAG, "OpenCV library found inside package. Using it!");
+//            mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
+//
+//            //
+//            Bitmap originalImage = drawableToBitmap(mImageView.getDrawable());
+//            Bitmap processedImage = processImage(originalImage);
+//            mImageView.setImageBitmap(processedImage);
+//        }
     }
-
 
     private Bitmap processImage(Bitmap bm){
         Mat im = new Mat();
@@ -149,6 +145,8 @@ public class MainActivity extends ActionBarActivity {
         Bitmap outBm = Bitmap.createBitmap(square_im.width(), square_im.height(), conf);
         Utils.matToBitmap(square_im, outBm);
         return outBm;
+
+//        return bm;
     }
 
 
@@ -165,11 +163,11 @@ public class MainActivity extends ActionBarActivity {
         Mat trans = Imgproc.getPerspectiveTransform(square, destMat);
         Mat squareIm = new Mat();
         Imgproc.warpPerspective(im, squareIm, trans, new Size(sz, sz));
-        Log.d(TAG, "post-warp image size: "+squareIm.height()+" x "+squareIm.width()+", "+squareIm.channels()+" channels");
+        Log.d(TAG, "post-warp image size: " + squareIm.height() + " x " + squareIm.width() + ", " + squareIm.channels() +" channels");
         return squareIm;
     }
 
-    */
+
     public static Bitmap drawableToBitmap (Drawable drawable) {
         Bitmap bitmap = null;
 

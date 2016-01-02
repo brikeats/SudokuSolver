@@ -1,12 +1,16 @@
 package com.example.brian.sudokusolver;
 
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +33,8 @@ import org.opencv.imgproc.Imgproc;
 import org.w3c.dom.Text;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,8 +43,12 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
 
     static final String TAG = "MainActivity";
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+
     private TextView highlightedSquare = null;
     private ImageView mImageView;
+    File mImageFile;
+    Bitmap mCameraBitmap;
 
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
@@ -58,6 +68,7 @@ public class MainActivity extends ActionBarActivity {
         }
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,9 +86,46 @@ public class MainActivity extends ActionBarActivity {
         mImageView = new ImageView(this);
         mImageView.setImageBitmap(bitmap);
         setContentView(mImageView);
+
+        mImageFile = getCameraPicture();
+
     }
 
 
+    private File getCameraPicture() {
+
+        String imageFileName = "temp";
+        File storageDir = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES);
+        File imageFile;
+        try {
+            imageFile = File.createTempFile(
+                    imageFileName,  /* prefix */
+                    ".jpg",         /* suffix */
+                    storageDir      /* directory */
+            );
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(imageFile));
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+        return imageFile;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            mCameraBitmap = BitmapFactory.decodeFile(mImageFile.getAbsolutePath(), bmOptions);
+            Log.d(TAG, "Loaded image of size "+mCameraBitmap.getWidth()+" x "+mCameraBitmap.getHeight());
+            mImageView.setImageBitmap(mCameraBitmap);
+        }
+    }
 
 
 
@@ -169,7 +217,7 @@ public class MainActivity extends ActionBarActivity {
 
 
     public static Bitmap drawableToBitmap (Drawable drawable) {
-        Bitmap bitmap = null;
+        Bitmap bitmap;
 
         if (drawable instanceof BitmapDrawable) {
             BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;

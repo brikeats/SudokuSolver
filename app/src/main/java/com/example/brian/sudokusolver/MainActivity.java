@@ -23,13 +23,18 @@ import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.android.Utils;
 import org.opencv.core.Core;
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.Rect;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.MatOfPoint2f;
 import org.opencv.core.Point;
-import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
+import org.opencv.core.Scalar;
+import org.opencv.core.TermCriteria;
+import org.opencv.ml.Ml;
+import org.opencv.ml.SVM;
 import org.w3c.dom.Text;
 
 
@@ -43,6 +48,7 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
 
     static final String TAG = "MainActivity";
+
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
     private TextView highlightedSquare = null;
@@ -58,7 +64,6 @@ public class MainActivity extends ActionBarActivity {
                 case LoaderCallbackInterface.SUCCESS:
                 {
                     Log.i(TAG, "OpenCV loaded successfully");
-                    //mOpenCvCameraView.enableView();
                 } break;
                 default:
                 {
@@ -80,14 +85,36 @@ public class MainActivity extends ActionBarActivity {
             Log.i(TAG, "Failed to load OpenCV library!");
         }
         else {
-            bitmap = processImage(bitmap);
+            PuzzleImageExtractor imageAnalyzer = new PuzzleImageExtractor(bitmap);
+            Mat[][] squareImArray = imageAnalyzer.getSquareImages();
+            int row = 5;
+            int col = 1;
+            bitmap = PuzzleImageExtractor.matToBitmap(squareImArray[row][col]);
+//            bitmap = imageAnalyzer.getProcessedBitmap();
+
         }
 
         mImageView = new ImageView(this);
         mImageView.setImageBitmap(bitmap);
         setContentView(mImageView);
+//        mImageFile = getCameraPicture();
 
-        mImageFile = getCameraPicture();
+
+//        SVM classifier = SVM.create();
+//        TermCriteria criteria = new TermCriteria(TermCriteria.EPS + TermCriteria.MAX_ITER,100,0.1);
+//        classifier.setKernel(SVM.LINEAR);
+//        classifier.setType(SVM.C_SVC);
+//        classifier.setGamma(0.5);
+//        classifier.setNu(0.5);
+//        classifier.setC(1);
+//        classifier.setTermCriteria(criteria);
+//
+//        //data is N x 64 trained data Mat , labels is N x 1 label Mat with integer values;
+//        classifier.train(data, Ml.ROW_SAMPLE, labels);
+//
+//        Mat results = new Mat();
+//        int label = (int) classifier.predict(testSamples, results, 0);
+//        return label;
 
     }
 
@@ -117,6 +144,7 @@ public class MainActivity extends ActionBarActivity {
         return imageFile;
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
@@ -126,7 +154,6 @@ public class MainActivity extends ActionBarActivity {
             mImageView.setImageBitmap(mCameraBitmap);
         }
     }
-
 
 
     @Override
@@ -145,74 +172,6 @@ public class MainActivity extends ActionBarActivity {
 //            Bitmap processedImage = processImage(originalImage);
 //            mImageView.setImageBitmap(processedImage);
 //        }
-    }
-
-    private Bitmap processImage(Bitmap bm){
-        Mat im = new Mat();
-        Utils.bitmapToMat(bm, im);
-        Log.d(TAG, "Loaded mat of size " + im.width() + " x " + im.height() + ", " + im.channels() + " channels");
-
-        // do image processing here
-        Imgproc.cvtColor(im, im, Imgproc.COLOR_RGB2GRAY);
-        Imgproc.equalizeHist(im, im);
-        Mat bw = new Mat();
-        Imgproc.adaptiveThreshold(im, bw, 255, Imgproc.ADAPTIVE_THRESH_MEAN_C,
-                Imgproc.THRESH_BINARY, 15, 5);
-        Core.bitwise_not(bw, bw);
-
-        // largest contour
-        List<MatOfPoint> contours = new ArrayList<>();
-        Mat hierarchy = new Mat();
-        Imgproc.findContours(bw, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_SIMPLE);
-        Log.d(TAG, "Got "+contours.size()+" contours");
-        MatOfPoint largestContour = contours.get(0);
-        double largestArea = Imgproc.contourArea(largestContour);
-        for(MatOfPoint contour: contours){
-            double area = Imgproc.contourArea(contour);
-            if(area > largestArea){
-                largestArea = area;
-                largestContour = contour;
-            }
-        }
-        Log.d(TAG, "largest contour has area "+largestArea);
-
-        // reduce to square
-        double eps = 30;  //FIXME: auto-select this value to always return 4 points
-        MatOfPoint2f  largestContour2f = new MatOfPoint2f(largestContour.toArray());
-        MatOfPoint2f square = new MatOfPoint2f();
-        Imgproc.approxPolyDP(largestContour2f, square, eps, true);
-        for(Point point: square.toList())
-            Log.d(TAG, point.toString());
-
-        // warp to square
-        int square_sz = 100;
-        int margin = 50;
-        Mat square_im = warpToSquare(im, square, square_sz, margin);
-
-        Bitmap.Config conf = Bitmap.Config.ARGB_8888;
-        Bitmap outBm = Bitmap.createBitmap(square_im.width(), square_im.height(), conf);
-        Utils.matToBitmap(square_im, outBm);
-        return outBm;
-
-//        return bm;
-    }
-
-
-    Mat warpToSquare(Mat im, MatOfPoint2f square, int square_sz, int margin){
-        float marginf = (float) margin;
-        float sz = 9f * square_sz + 2f * margin;
-        ArrayList<Point> dest = new ArrayList<>();
-        dest.add(new Point(marginf, marginf));
-        dest.add(new Point(marginf, sz - marginf));
-        dest.add(new Point(sz - marginf, sz - marginf));
-        dest.add(new Point(sz - marginf, marginf));
-        MatOfPoint2f destMat = new MatOfPoint2f();
-        destMat.fromList(dest);
-        Mat trans = Imgproc.getPerspectiveTransform(square, destMat);
-        Mat squareIm = new Mat();
-        Imgproc.warpPerspective(im, squareIm, trans, new Size(sz, sz));
-        Log.d(TAG, "post-warp image size: " + squareIm.height() + " x " + squareIm.width() + ", " + squareIm.channels() +" channels");
-        return squareIm;
     }
 
 

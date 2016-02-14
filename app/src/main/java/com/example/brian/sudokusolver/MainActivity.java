@@ -21,28 +21,12 @@ import android.widget.TextView;
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
-import org.opencv.android.Utils;
-import org.opencv.core.Core;
-import org.opencv.core.CvType;
 import org.opencv.core.Mat;
-import org.opencv.core.Rect;
-import org.opencv.core.MatOfPoint;
-import org.opencv.core.MatOfPoint2f;
-import org.opencv.core.Point;
-import org.opencv.core.Size;
-import org.opencv.imgproc.Imgproc;
-import org.opencv.core.Scalar;
-import org.opencv.core.TermCriteria;
-import org.opencv.ml.Ml;
-import org.opencv.ml.SVM;
-import org.w3c.dom.Text;
 
+import weka.classifiers.Classifier;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -89,10 +73,21 @@ public class MainActivity extends ActionBarActivity {
             Mat[][] squareImArray = imageAnalyzer.getSquareImages();
             int row = 5;
             int col = 1;
-            bitmap = PuzzleImageExtractor.matToBitmap(squareImArray[row][col]);
-//            bitmap = imageAnalyzer.getProcessedBitmap();
+//            bitmap = PuzzleImageExtractor.matToBitmap(squareImArray[row][col]);
+            bitmap = imageAnalyzer.getProcessedBitmap();
 
         }
+
+
+        // FIXME: the model is trained with zeroes included; change that in weka explorer GUI
+
+
+        int classifierId = R.raw.commiteeOfForests20;
+        String classifierFilename = getResources().getResourceName(classifierId);
+        Classifier classifier = loadClassifier(classifierFilename);
+        if (classifier == null) Log.d(TAG, "Couldn't load classifier!");
+        else Log.d(TAG, "Loaded classifier: "+classifier.toString());
+
 
         mImageView = new ImageView(this);
         mImageView.setImageBitmap(bitmap);
@@ -116,6 +111,21 @@ public class MainActivity extends ActionBarActivity {
 //        int label = (int) classifier.predict(testSamples, results, 0);
 //        return label;
 
+    }
+
+
+    private Classifier loadClassifier(String classifierFilename){
+        Classifier classifier = null;
+        try{
+            classifier = (Classifier) weka.core.SerializationHelper.read(classifierFilename);
+            System.out.println("Loaded classifier: ");
+            System.out.println(classifier.toString());
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            System.out.println("Failed to load "+classifierFilename);
+        }
+        return classifier;
     }
 
 
